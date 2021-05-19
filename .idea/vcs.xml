@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dj_fam/DJ_FAM" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dj_fam/DjFam" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dj_fam/Django_Familiarity" vcs="Git" />
+  </component>
+</project>
