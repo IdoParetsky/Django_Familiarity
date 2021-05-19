@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Django_Familiarity
+  version: 1.0.0
+  description: Ido learning Django
+paths:
+  /fam/:
+    get:
+      operationId: fam_list
+      description: ''
+      tags:
+      - fam
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Human'
+          description: ''
+    post:
+      operationId: fam_create
+      description: ''
+      tags:
+      - fam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Human'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Human'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Human'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human'
+          description: ''
+  /fam/{id}/:
+    get:
+      operationId: fam_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this human.
+        required: true
+      tags:
+      - fam
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human'
+          description: ''
+    put:
+      operationId: fam_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this human.
+        required: true
+      tags:
+      - fam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Human'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Human'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Human'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human'
+          description: ''
+    patch:
+      operationId: fam_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this human.
+        required: true
+      tags:
+      - fam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedHuman'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedHuman'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedHuman'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human'
+          description: ''
+    delete:
+      operationId: fam_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this human.
+        required: true
+      tags:
+      - fam
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Human:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+        age:
+          type: integer
+          maximum: 120
+          minimum: 0
+        height:
+          type: integer
+          maximum: 300
+          minimum: 1
+        weight:
+          type: integer
+          maximum: 999
+          minimum: 1
+        occupation:
+          type: string
+          maxLength: 50
+      required:
+      - age
+      - height
+      - name
+      - occupation
+      - weight
+    PatchedHuman:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+        age:
+          type: integer
+          maximum: 120
+          minimum: 0
+        height:
+          type: integer
+          maximum: 300
+          minimum: 1
+        weight:
+          type: integer
+          maximum: 999
+          minimum: 1
+        occupation:
+          type: string
+          maxLength: 50
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: Session

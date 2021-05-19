@@ -5,7 +5,7 @@ from rest_framework import viewsets, mixins
 from .models import Human
 from .serializers import HumanSerializer
 import json
-
+# from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -21,8 +21,9 @@ class Fam(viewsets.ModelViewSet, mixins.CreateModelMixin):
     def create(self, request, serializer_class=serializer_class, queryset=queryset):
         human = serializer_class(data=request.data)
         if human.is_valid():
-            human.save()
-            return JsonResponse(human.data)
+            tosave = human.create()
+            tosave.save()
+            return JsonResponse(human.validated_data)
         else:
             return JsonResponse(human.errors)
 

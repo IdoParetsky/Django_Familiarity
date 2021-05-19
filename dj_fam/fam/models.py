@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Human(models.Model):
-    # id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     time = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=50)
     age = models.PositiveIntegerField(validators=[MaxValueValidator(120)])  # years
