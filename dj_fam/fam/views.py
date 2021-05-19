@@ -58,5 +58,3 @@ class Fam(viewsets.ModelViewSet, mixins.CreateModelMixin):
             all[HumanSerializer(human).data['id']] = HumanSerializer(human).data
         return JsonResponse(all)
 """
-
-#change
