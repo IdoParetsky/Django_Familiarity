@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,8 +89,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dj_db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lassi',
+
+        'USER': 'root',
+        'PASSWORD': os.environ['MYSQL_PASSWORD'],
+        'HOST': os.environ['DB'],   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTIONS': {
+                    'init_command': 'SET innodb_strict_mode=1',
+        },
     }
 }
 
