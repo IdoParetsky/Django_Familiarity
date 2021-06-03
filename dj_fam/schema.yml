@@ -3,13 +3,17 @@ info:
   title: Django_Familiarity
   version: 1.0.0
   description: Ido learning Django
+tags:
+  - name: 'human'
+    description: 'All about humans'
 paths:
   /fam/:
     get:
       operationId: fam_list
-      description: ''
+      description: 'Get all'
       tags:
-      - fam
+      - human
+      summary: 'View all humans in the database'
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -25,9 +29,10 @@ paths:
           description: ''
     post:
       operationId: fam_create
-      description: ''
+      description: 'Post a human'
       tags:
-      - fam
+      - human
+      summary: 'Insert a human to the database'
       requestBody:
         content:
           application/json:
@@ -54,7 +59,7 @@ paths:
   /fam/{id}/:
     get:
       operationId: fam_retrieve
-      description: ''
+      description: 'Get(ID)'
       parameters:
       - in: path
         name: id
@@ -63,7 +68,8 @@ paths:
         description: A unique integer value identifying this human.
         required: true
       tags:
-      - fam
+      - human
+      summary: View a human from the database, by ID
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -77,7 +83,7 @@ paths:
           description: ''
     put:
       operationId: fam_update
-      description: ''
+      description: 'Replace(ID)'
       parameters:
       - in: path
         name: id
@@ -86,7 +92,8 @@ paths:
         description: A unique integer value identifying this human.
         required: true
       tags:
-      - fam
+      - human
+      summary: 'Replace an existing human in the database, by ID'
       requestBody:
         content:
           application/json:
@@ -112,7 +119,7 @@ paths:
           description: ''
     patch:
       operationId: fam_partial_update
-      description: ''
+      description: 'Update(ID)'
       parameters:
       - in: path
         name: id
@@ -121,18 +128,8 @@ paths:
         description: A unique integer value identifying this human.
         required: true
       tags:
-      - fam
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedHuman'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedHuman'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedHuman'
+      - human
+      summary: 'Update an existing human in the database in place, by ID'
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -146,7 +143,7 @@ paths:
           description: ''
     delete:
       operationId: fam_destroy
-      description: ''
+      description: 'Delete(ID)'
       parameters:
       - in: path
         name: id
@@ -155,7 +152,8 @@ paths:
         description: A unique integer value identifying this human.
         required: true
       tags:
-      - fam
+      - human
+      summary: 'Delete an existing human in the databse, by ID'
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -171,48 +169,32 @@ components:
         name:
           type: string
           maxLength: 50
+          example: 'Johnny Hirsch (First & Last)'
         age:
           type: integer
           maximum: 120
           minimum: 0
+          example: '27 (Years)'
         height:
           type: integer
           maximum: 300
           minimum: 1
+          example: '176 (Centimeters)'
         weight:
           type: integer
           maximum: 999
           minimum: 1
+          example: '70 (Kilograms)'
         occupation:
           type: string
           maxLength: 50
+          example: 'Industrial Engineer'
       required:
       - age
       - height
       - name
       - occupation
       - weight
-    PatchedHuman:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 50
-        age:
-          type: integer
-          maximum: 120
-          minimum: 0
-        height:
-          type: integer
-          maximum: 300
-          minimum: 1
-        weight:
-          type: integer
-          maximum: 999
-          minimum: 1
-        occupation:
-          type: string
-          maxLength: 50
   securitySchemes:
     basicAuth:
       type: http
